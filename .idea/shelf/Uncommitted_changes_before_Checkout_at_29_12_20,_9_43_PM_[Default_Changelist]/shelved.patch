@@ -1,0 +1,32 @@
+Index: app/src/main/java/com/tutorial/androidtutorial/fragment/DetailFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.tutorial.androidtutorial.fragment;\n\nimport android.os.Bundle;\n\nimport androidx.annotation.NonNull;\nimport androidx.annotation.Nullable;\nimport androidx.fragment.app.Fragment;\n\nimport android.view.LayoutInflater;\nimport android.view.MenuItem;\nimport android.view.View;\nimport android.view.ViewGroup;\nimport android.view.animation.Animation;\nimport android.widget.TextView;\n\nimport com.tutorial.androidtutorial.R;\n\npublic class DetailFragment extends Fragment {\n    private String username;\n\n    public DetailFragment() {\n        // Required empty public constructor\n    }\n\n    public static DetailFragment newInstance(Bundle bundle) {\n        DetailFragment fragment = new DetailFragment();\n        fragment.setArguments(bundle);\n        return fragment;\n    }\n\n    @Override\n    public void onCreate(Bundle savedInstanceState) {\n        super.onCreate(savedInstanceState);\n        if (getArguments() != null) {\n            username = getArguments().getString(\"username\");\n        }\n    }\n\n    @Override\n    public View onCreateView(LayoutInflater inflater, ViewGroup container,\n                             Bundle savedInstanceState) {\n        // Inflate the layout for this fragment\n        View rootView = inflater.inflate(R.layout.fragment_detail, container, false);\n        setWidget(rootView);\n        return rootView;\n    }\n\n    private void setWidget(View rootView) {\n        TextView tvUsername = rootView.findViewById(R.id.tv_username);\n        tvUsername.setText(username);\n    }\n\n    @Nullable\n    @Override\n    public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {\n        return super.onCreateAnimation(transit, enter, nextAnim);\n    }\n\n    @Override\n    public boolean onOptionsItemSelected(@NonNull MenuItem item) {\n        return super.onOptionsItemSelected(item);\n    }\n\n    @Override\n    public void onHiddenChanged(boolean hidden) {\n        super.onHiddenChanged(hidden);\n    }\n\n    @Override\n    public boolean onContextItemSelected(@NonNull MenuItem item) {\n        return super.onContextItemSelected(item);\n\n\\\\   }\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/tutorial/androidtutorial/fragment/DetailFragment.java	(revision 771ab188c8aaaae55d92453cb614c89015c12b76)
++++ app/src/main/java/com/tutorial/androidtutorial/fragment/DetailFragment.java	(date 1609256653000)
+@@ -70,5 +70,5 @@
+     public boolean onContextItemSelected(@NonNull MenuItem item) {
+         return super.onContextItemSelected(item);
+ 
+-\\   }
++  }
+ }
+\ No newline at end of file
+Index: .idea/vcs.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/vcs.xml	(date 1609253350000)
++++ .idea/vcs.xml	(date 1609253350000)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="VcsDirectoryMappings">
++    <mapping directory="" vcs="Git" />
++  </component>
++</project>
+\ No newline at end of file

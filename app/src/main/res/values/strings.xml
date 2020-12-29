@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Android Tutorial</string>
+    <string name="my_text">Hello Guys welcome to this Tutorial!</string>
+    <string name="welcome">Welcome to the Android Tutorial</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

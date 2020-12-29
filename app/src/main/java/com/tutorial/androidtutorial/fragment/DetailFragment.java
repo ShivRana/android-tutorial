@@ -1,5 +1,7 @@
 package com.tutorial.androidtutorial.fragment;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,15 +13,23 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.tutorial.androidtutorial.R;
 
 public class DetailFragment extends Fragment {
     private String username;
+    private Context mContext;
 
     public DetailFragment() {
         // Required empty public constructor
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        mContext = context;
+        super.onAttach(context);
     }
 
     public static DetailFragment newInstance(Bundle bundle) {
@@ -46,29 +56,17 @@ public class DetailFragment extends Fragment {
     }
 
     private void setWidget(View rootView) {
-        TextView tvUsername = rootView.findViewById(R.id.tv_username);
-        tvUsername.setText(username);
+//        TextView tvUsername = rootView.findViewById(R.id.tv_username);
+//        tvUsername.setText(username);
+        Button btFireEvent = rootView.findViewById(R.id.bt_fire_intent);
+        btFireEvent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.putExtra("username", username);
+                intent.setAction("com.tutorial.androidtutorial.FIRE_EVENT");
+                mContext.sendStickyBroadcast(intent);
+            }
+        });
     }
-
-    @Nullable
-    @Override
-    public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
-        return super.onCreateAnimation(transit, enter, nextAnim);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onHiddenChanged(boolean hidden) {
-        super.onHiddenChanged(hidden);
-    }
-
-    @Override
-    public boolean onContextItemSelected(@NonNull MenuItem item) {
-        return super.onContextItemSelected(item);
-
-\\   }
 }

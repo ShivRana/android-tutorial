@@ -62,9 +62,8 @@ public class DetailFragment extends Fragment {
         btFireEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
+                Intent intent = new Intent("com.tutorial.androidtutorial.FIRE_EVENT");
                 intent.putExtra("username", username);
-                intent.setAction("com.tutorial.androidtutorial.FIRE_EVENT");
                 mContext.sendStickyBroadcast(intent);
             }
         });

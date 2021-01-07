@@ -123,7 +123,7 @@ public class DetailsActivity extends AppCompatActivity {
 
     void setRecyclerView() {
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
-        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(mLayoutManager);
 
         ArrayList<User> userArrayList = new ArrayList<>();
@@ -133,10 +133,21 @@ public class DetailsActivity extends AppCompatActivity {
         userArrayList.add(new User("John", "84975765695"));
         userArrayList.add(new User("Rahul", "849757653645"));
         userArrayList.add(new User("Vinay", "84975765655"));
+        userArrayList.add(new User("bjhbjh", "84975765655"));
+        userArrayList.add(new User("Vinjvacsjvjay", "84975765655"));
+        userArrayList.add(new User("Vivhcvjhnay", "84975765655"));
+        userArrayList.add(new User("Vikkdjfnay", "84975765655"));
 
         UserAdapter adapter = new UserAdapter(this, userArrayList);
         recyclerView.setAdapter(adapter);
 
 
     }
+//
+//    @Override
+//    public void onItemClick(View view, User user) {
+//        if (view.getId() == R.id.tv_name) {
+//            Toast.makeText(this, user.getName(), Toast.LENGTH_LONG).show();
+//        }
+//    }
 }

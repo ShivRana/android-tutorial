@@ -14,7 +14,7 @@ import com.tutorial.androidtutorial.model.User;
 
 import java.util.ArrayList;
 
-public class UserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> {
 
     private final Context context;
     private final ArrayList<User> users;
@@ -26,16 +26,15 @@ public class UserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_user, parent, false);
-        return new MyViewHolder(v);
+    public UserAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_user, parent, false);
+        return new MyViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        ((MyViewHolder) holder).tvName.setText(users.get(position).getName());
-        ((MyViewHolder) holder).tvPhone.setText(users.get(position).getPhone());
-
+    public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
+        holder.tvName.setText(users.get(position).getName());
+        holder.tvPhone.setText(users.get(position).getPhone());
     }
 
     @Override
@@ -43,15 +42,14 @@ public class UserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         return users.size();
     }
 
-
     class MyViewHolder extends RecyclerView.ViewHolder {
-        private TextView tvName;
-        private TextView tvPhone;
+        TextView tvName;
+        TextView tvPhone;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvName = (TextView) itemView.findViewById(R.id.tv_name);
-            tvPhone = (TextView) itemView.findViewById(R.id.tv_phone);
+            tvName = itemView.findViewById(R.id.tv_name);
+            tvPhone = itemView.findViewById(R.id.tv_phone);
         }
     }
 }

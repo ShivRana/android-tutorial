@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tutorial.androidtutorial.R;
@@ -28,16 +29,21 @@ import java.util.ArrayList;
 public class DetailsActivity extends AppCompatActivity {
 
     private String username;
-    private String password;
+    private String phone;
+    private UserAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
 
-        if (getIntent().hasExtra("username") && getIntent().hasExtra("password")) {
+        if (getIntent().hasExtra("username") && getIntent().hasExtra("phone")) {
             username = getIntent().getStringExtra("username");
-            password = getIntent().getStringExtra("password");
+            phone = getIntent().getStringExtra("phone");
+            TextView tvName = findViewById(R.id.tv_name);
+            TextView tvPhone = findViewById(R.id.tv_phone);
+            tvName.setText(username);
+            tvPhone.setText(phone);
 //            showTheList();
             //  openFragment(username);
             setRecyclerView();
@@ -122,11 +128,11 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
     void setRecyclerView() {
-        RecyclerView recyclerView = findViewById(R.id.recycler_view);
+        final RecyclerView recyclerView = findViewById(R.id.recycler_view);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(mLayoutManager);
 
-        ArrayList<User> userArrayList = new ArrayList<>();
+        final ArrayList<User> userArrayList = new ArrayList<>();
         userArrayList.add(new User("Ram", "8497576585"));
         userArrayList.add(new User("Shyam", "8497576585"));
         userArrayList.add(new User("Steve", "8497576585"));
@@ -137,11 +143,17 @@ public class DetailsActivity extends AppCompatActivity {
         userArrayList.add(new User("Vinjvacsjvjay", "84975765655"));
         userArrayList.add(new User("Vivhcvjhnay", "84975765655"));
         userArrayList.add(new User("Vikkdjfnay", "84975765655"));
-
-        UserAdapter adapter = new UserAdapter(this, userArrayList);
+        adapter = new UserAdapter(this, userArrayList, new UserAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, User user, int position) {
+                if (view.getId() == R.id.bt_show_user) {
+                    userArrayList.add(new User("Test User", "7455855895"));
+                    adapter.notifyDataSetChanged();
+                    Toast.makeText(DetailsActivity.this, user.getName() + " has been removed", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
         recyclerView.setAdapter(adapter);
-
-
     }
 //
 //    @Override

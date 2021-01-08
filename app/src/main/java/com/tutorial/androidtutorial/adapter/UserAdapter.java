@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,10 +19,12 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> 
 
     private final Context context;
     private final ArrayList<User> users;
+    private final OnItemClickListener onItemClickListener;
 
-    public UserAdapter(Context context, ArrayList<User> users) {
+    public UserAdapter(Context context, ArrayList<User> users, OnItemClickListener onItemClickListener) {
         this.context = context;
         this.users = users;
+        this.onItemClickListener = onItemClickListener;
     }
 
     @NonNull
@@ -35,6 +38,19 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> 
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
         holder.tvName.setText(users.get(position).getName());
         holder.tvPhone.setText(users.get(position).getPhone());
+
+        holder.btShowUSer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onItemClickListener.onItemClick(v, users.get(position), position);
+            }
+        });
+        holder.tvName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onItemClickListener.onItemClick(v, users.get(position), position);
+            }
+        });
     }
 
     @Override
@@ -45,11 +61,17 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> 
     class MyViewHolder extends RecyclerView.ViewHolder {
         TextView tvName;
         TextView tvPhone;
+        Button btShowUSer;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             tvName = itemView.findViewById(R.id.tv_name);
             tvPhone = itemView.findViewById(R.id.tv_phone);
+            btShowUSer = itemView.findViewById(R.id.bt_show_user);
         }
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(View view, User user, int position);
     }
 }

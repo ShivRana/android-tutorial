@@ -18,4 +18,10 @@
         android:layout_height="wrap_content"
         android:text="99643685768" />
 
+    <Button
+        android:id="@+id/bt_show_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delete User" />
+
 </LinearLayout>
